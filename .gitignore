@@ -40,8 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# firebase
-lib/firebase.ts
-
 # Local Netlify folder
 .netlify
