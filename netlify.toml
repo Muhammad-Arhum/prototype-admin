@@ -1,7 +1,6 @@
 [build]
-  base = "admin-panel"
   command = "npm run build"
-  publish = ".next"
+  publish = ".next"  # Netlify Next.js plugin handles API routes
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
