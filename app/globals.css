@@ -1,26 +1,123 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Nexus MedTech - Clean, Professional, Trustworthy */
+  --background: 210 20% 98%;
+  --foreground: 210 25% 15%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 210 25% 15%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 210 25% 15%;
+
+  --primary: 175 45% 45%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 168 35% 92%;
+  --secondary-foreground: 175 45% 30%;
+
+  --muted: 210 15% 95%;
+  --muted-foreground: 210 15% 45%;
+
+  --accent: 200 65% 94%;
+  --accent-foreground: 200 55% 35%;
+
+  --destructive: 0 65% 55%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 210 20% 90%;
+  --input: 210 20% 90%;
+  --ring: 175 45% 45%;
+
+  --radius: 0.75rem;
+
+  /* Custom Nexus tokens */
+  --nexus-teal: 175 45% 45%;
+  --nexus-teal-light: 175 45% 95%;
+  --nexus-mint: 168 40% 85%;
+  --nexus-blue: 200 55% 50%;
+  --nexus-blue-light: 200 65% 94%;
+  --nexus-gray: 210 15% 60%;
+  --nexus-dark: 210 25% 15%;
+
+  /* Gradients */
+  --gradient-hero: linear-gradient(135deg, hsl(175 45% 45%) 0%, hsl(200 55% 50%) 100%);
+  --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 20% 98%) 100%);
+  --gradient-accent: linear-gradient(135deg, hsl(168 35% 92%) 0%, hsl(200 65% 94%) 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 hsl(210 25% 15% / 0.03);
+  --shadow-md: 0 4px 12px -2px hsl(210 25% 15% / 0.06);
+  --shadow-lg: 0 12px 32px -8px hsl(210 25% 15% / 0.08);
+  --shadow-card: 0 2px 8px -2px hsl(210 25% 15% / 0.04), 0 0 0 1px hsl(210 20% 90% / 0.5);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-border: hsl(var(--border));
+
+  --color-nexus-teal: hsl(var(--nexus-teal));
+  --color-nexus-teal-light: hsl(var(--nexus-teal-light));
+  --color-nexus-mint: hsl(var(--nexus-mint));
+  --color-nexus-blue: hsl(var(--nexus-blue));
+  --color-nexus-blue-light: hsl(var(--nexus-blue-light));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .nexus-container {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .nexus-section {
+    @apply py-16 md:py-24;
+  }
+
+  .nexus-card {
+    @apply rounded-xl bg-card p-6 transition-all duration-300;
+    box-shadow: var(--shadow-card);
+  }
+
+  .nexus-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .nexus-gradient-text {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nexus-badge {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium;
+    background: hsl(var(--nexus-teal-light));
+    color: hsl(var(--nexus-teal));
+  }
 }
