@@ -1,7 +1,8 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { Calendar, Users, Code, Cpu, Rocket, Wrench, Activity, Bot, Brain, BarChart3, Shield, FileText, Search } from 'lucide-react';
+import { Calendar, Users, Code, Cpu, Rocket, Wrench, Activity, Bot, Brain, BarChart3, Shield, FileText, Search, ArrowRight } from 'lucide-react';
 import { getCollectionData } from '@/lib/db';
+import Link from 'next/link';
 
 const iconMap: { [key: string]: any } = {
   Users,
@@ -83,17 +84,39 @@ export const EventsSection = () => {
                 />
               </div>
               <div className="min-w-0 flex-1">
-                <div className="mb-1 flex items-center gap-2">
-                  <h3 className="truncate font-semibold">{event.title}</h3>
+                <div className="mb-1">
+                  <h3 className="truncate font-semibold text-lg group-hover:text-primary transition-colors">
+                    <Link href={`/events/${event.id}`}>
+                      {event.title}
+                    </Link>
+                  </h3>
                 </div>
-                <span className="mb-2 inline-block rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+                <span className="mb-3 inline-block rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground uppercase tracking-wider font-medium">
                   {event.type}
                 </span>
-                <p className="text-sm text-muted-foreground">{event.description}</p>
+                <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{event.description}</p>
+                <Link
+                  href={`/events/${event.id}`}
+                  className="inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline"
+                >
+                  View Details
+                </Link>
               </div>
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-16 text-center"
+        >
+          <Link href="/events" className="nexus-btn-primary group">
+            View All Events
+            <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

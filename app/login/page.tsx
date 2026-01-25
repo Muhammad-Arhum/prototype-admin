@@ -7,7 +7,7 @@ import { rtdb } from '@/lib/firebase';
 import { ref, get } from 'firebase/database';
 
 export default function LoginPage() {
-    const [username, setUsername] = useState('');
+    const [loginId, setLoginId] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -24,19 +24,18 @@ export default function LoginPage() {
 
             if (snapshot.exists()) {
                 const data = snapshot.val();
-                // Check if credentials match RTDB data
-                if (username === data.username && password === data.password) {
+                if (loginId === data.username && password === data.password) {
                     localStorage.setItem('admin_auth', 'true');
                     router.push('/admin-panel');
                 } else {
-                    setError('Invalid credentials from database');
+                    setError('Invalid credentials');
                 }
             } else {
-                setError('No credential data found in Database');
+                setError('Database connection error');
             }
         } catch (err) {
             console.error('Login error:', err);
-            setError('Error connecting to Firebase');
+            setError('Failed to connect to security database');
         } finally {
             setLoading(false);
         }
@@ -55,13 +54,13 @@ export default function LoginPage() {
 
                 <form onSubmit={handleLogin} className="space-y-6">
                     <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">Username</label>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">Login Identifier</label>
                         <div className="relative">
                             <User className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                             <input
                                 type="text"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                value={loginId}
+                                onChange={(e) => setLoginId(e.target.value)}
                                 className="w-full bg-slate-50 border border-slate-200 rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all"
                                 placeholder="Enter username"
                                 required

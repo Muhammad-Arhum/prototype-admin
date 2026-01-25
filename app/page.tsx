@@ -6,6 +6,7 @@ import { AboutSection } from '@/components/AboutSection';
 import { ProjectsSection } from '@/components/ProjectsSection';
 import { EventsSection } from '@/components/EventsSection';
 import { BlogSection } from '@/components/BlogSection';
+import { ResearchSection } from '@/components/ResearchSection';
 import { WorkshopsSection } from '@/components/WorkshopsSection';
 import { TeamSection } from '@/components/TeamSection';
 import { ContactSection } from '@/components/ContactSection';
@@ -20,6 +21,7 @@ export default function LandingPage() {
                 <AboutSection />
                 <ProjectsSection />
                 <EventsSection />
+                <ResearchSection />
                 <BlogSection />
                 <WorkshopsSection />
                 <TeamSection />

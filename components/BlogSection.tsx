@@ -1,7 +1,8 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { BookOpen, User, CalendarDays } from 'lucide-react';
+import { BookOpen, User, CalendarDays, ArrowRight } from 'lucide-react';
 import { getCollectionData } from '@/lib/db';
+import Link from 'next/link';
 
 export const BlogSection = () => {
     const [posts, setPosts] = useState<any[]>([]);
@@ -54,7 +55,7 @@ export const BlogSection = () => {
                             transition={{ duration: 0.5, delay: 0.2 + index * 0.08 }}
                             className="nexus-card group flex flex-col"
                         >
-                            <div className="mb-4">
+                            <Link href={`/blog/${post.id}`} className="flex-1 mb-4 block">
                                 <h3 className="mb-2 text-xl font-semibold group-hover:text-primary transition-colors">
                                     {post.title}
                                 </h3>
@@ -71,10 +72,28 @@ export const BlogSection = () => {
                                 <p className="text-sm text-muted-foreground line-clamp-3">
                                     {post.excerpt || (post.content ? post.content.substring(0, 100) + '...' : 'Read more...')}
                                 </p>
-                            </div>
+                            </Link>
+                            <Link
+                                href={`/blog/${post.id}`}
+                                className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline hover:gap-2 transition-all"
+                            >
+                                Read More <ArrowRight size={14} />
+                            </Link>
                         </motion.div>
                     ))}
                 </div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                    className="mt-16 text-center"
+                >
+                    <Link href="/blog" className="nexus-btn-primary group">
+                        View All Posts
+                        <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                </motion.div>
             </div>
         </section>
     );
